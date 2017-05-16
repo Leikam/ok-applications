@@ -10,5 +10,3 @@ var serverConfig = {
         app_key: "CBALOJILEBABABABA"
     }
 };
-
-

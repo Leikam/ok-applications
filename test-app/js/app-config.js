@@ -1,6 +1,6 @@
 var appConf = {
-    app_id: serverConfig.app_id,
-    app_key: serverConfig.app_key,
+    app_id: serverConfig.app.app_id,
+    app_key: serverConfig.app.app_key,
     group: {
         scope: [
             'MESSAGES_FROM_GROUP',
