@@ -4,13 +4,17 @@ var TEST_ENV =
     //true
 ;
 
-var IP = '192.168.0.105'; // your external app address
+var IP = TEST_ENV
+    ? 'localhost'
+    : 'https://leikam.github.io/ok-applications/test-app'; // your external app address
+var WIDGET_IP = 'localhost';
+
 var serverConfig = {
-    appName: 'api-test-app',
+    appName: 'test-app',
     domain: IP + ':8089',
     widget_server: TEST_ENV
         ? 'https://connect.ok.ru/'
-        : ('http://'+ IP +':8088/'),
+        : ('http://'+ WIDGET_IP +':8088/'),
     api_server: TEST_ENV
         ? 'http://apitest.ok.ru'
         : 'http://sdevr65.mail.msk:8090/'
