@@ -1,0 +1,14 @@
+iframe.ok-sdk-frame {
+    border: 1px solid #a8a8a8;
+    padding: 2px;
+    box-shadow: 2px 2px 2px 0 #d6d6d6;
+    width: 80%;
+    height: 50%;
+    
+    background-color: #fff;
+    
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-25%);
+    }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>Returning page</title>
+</head>
+<body>
+<p>Не 404, но обождите, сейчас редиректнем..</p>
+<div>
+    Осталось: <span id="counter">3</span>
+</div>
+<button id="stop">Остаться на странице</button>
+<br>
+
+<script>
+    var counterNode = document.getElementById('counter');
+    var stopButton = document.getElementById('stop');
+    var tid;
+
+    stopButton.addEventListener('click', function () {
+        clearTimeout(tid);
+    });
+
+    function timer(left, cb) {
+        tid = setTimeout(
+            function () {
+                counterNode.innerHTML = left;
+                if (left > 0) {
+                    timer(--left, cb);
+                } else {
+                    counterNode.innerHTML = 'уходим..';
+                    cb();
+                }
+            },
+            1000
+        );
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.opener) {
+            timer(2,
+                function () {
+                    window.parent.postMessage({event: 'returned'}, '*');
+                    window.close();
+                }
+            );
+        }
+    });
+
+    window.addEventListener('message', function (e) {
+        console.log('-> Return page got a message', e.data);
+    })
+</script>
+
+</body>
+</html>

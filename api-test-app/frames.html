@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Общение через фреймы</title>
+</head>
+<body>
+
+<button id="changeHash">сообщение фрейму (CORS-through)</button>
+<input id="hashValue" type="text"/>
+
+<br>
+<iframe src="../app2" name="inside-app-frame" width="100%" height="400"></iframe>
+
+<script>
+    document.getElementById('changeHash').addEventListener('click', function () {
+       window.frames['inside-app-frame'].location.hash = encodeURIComponent(document.getElementById('hashValue').value);
+    });
+</script>
+
+</body>
+</html>

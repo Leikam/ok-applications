@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru-RU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>Приложения для тестирования</title>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/ok-sdk.css"/>
+    <script src="js/config.js"></script>
+    <!--<script src="js/fapi5.js"></script>-->
+    <script src="js/ok-js-sdk.js"></script>
+    <script src="js/utils.js"></script>
+</head>
+<body>
+
+<!--<p>Проверяем работу методов апи в разных средах</p>-->
+<ul class="list">
+    <li><a href="/ok-applications">Назад</a></li>
+    <li><a href="/ok-applications/api-test-app">Обновить</a></li>
+</ul>
+<div class="hello-div">
+    загрузка пользователя..
+</div>
+<ul class="list">
+    <li><a id="toFeed" target="_blank">загрузка сслыки на ленту</a></li>
+</ul>
+
+<ul class="list">
+    <!--<li><button id="testAnyFunc">testAnyFunc</button></li>-->
+    <li>
+        <button id="oauthme">OAUTH</button>
+        &nbsp;
+        <button id="logout">Разлогин</button></li>
+    </li>
+    <!--<li>-->
+        <!--<button id="loginMe">Залогин</button>&nbsp;-->
+        <!--<button id="logout">Разлогин</button>-->
+    <!--</li>-->
+    <li><button id="whoami">Базовые данные о залогиненном пользователе</button></li>
+    <!--<li><button id="aboutGroup">Данные о группе 54423259185266</button></li>-->
+    <li><button id="askPermissions">Запрос за правами</button></li>
+    <!--<li><button id="requestChat">написать в чат</button></li>-->
+    <li><button id="postingFeed">Запись в ленту</button></li>
+    <li><button id="requestChatPermission">Запрос администратора на чат с пользователем</button></li>
+    <li><button id="requestPostingPermission">Запрос на запись в ленту от имени группы</button></li>
+    <li><button id="requestAllGroupPermissions">Запрос от группового приложения на все</button></li>
+</ul>
+
+<ul class="list">
+    <li><input id="openWindowData" type="text" value="returnToMain"/><button id="openWindow">открыть новое окно</button></li>
+</ul>
+
+<div class="content">
+    Место для рекламы
+</div>
+
+
+<!--<iframe class="ok-sdk-frame" name="ok-sdk" src="http://localhost:8081"></iframe>-->
+
+<script src="js/main.js"></script>
+</body>
+</html>
