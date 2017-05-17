@@ -1,8 +1,6 @@
 console.log('init location: ', location);
 
-var APP_NAME = serverConfig.appName;
-var DOMAIN = serverConfig && serverConfig.domain || 'ok.ru';
-var WIDGET_SERVER = serverConfig && serverConfig.widget_server || 'ok.ru';
+var DOMAIN = serverConfig.app_domain || 'ok.ru';
 
 OKSDK.init(appConf, init_success, init_failure);
 
@@ -31,7 +29,7 @@ function init_success() {
 
         var linkToFeed = document.getElementById('toFeed');
         if (data) {
-            var linkSrc = 'http://' + DOMAIN + '/profile/' + data.uid;
+            var linkSrc = 'http://test.ok.ru' + '' + '/profile/' + data.uid;
             linkToFeed.href = linkSrc;
             linkToFeed.innerHTML = linkSrc;
             linkToFeed.style.display = '';
@@ -126,8 +124,7 @@ var clickHandlersRegister = {
         };
         var params = {
             attachment: JSON.stringify(attachment),
-            //attachment: btoa(unescape(encodeURIComponent(OKSDK.toString(attachment)))),
-            return: location.origin + '/'+ APP_NAME +'/return.html',
+            return: DOMAIN +'/return.html',
             popup: 'off',
             utext: 'on',
             silent: 'off',
@@ -153,7 +150,7 @@ var clickHandlersRegister = {
             'OAuth2Permissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: location.origin + "/" + APP_NAME + "/return.html",
+                redirect_uri: DOMAIN +'/return.html',
                 response_type: 'token',
                 scope: appConf.oauth.scope,
                 show_permissions: true
@@ -166,7 +163,7 @@ var clickHandlersRegister = {
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: location.origin + "/" + APP_NAME + "/return.html",
+                redirect_uri: DOMAIN +'/return.html',
                 response_type: 'token',
                 scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
             }
@@ -178,7 +175,7 @@ var clickHandlersRegister = {
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: location.origin + "/" + APP_NAME + "/return.html",
+                redirect_uri: DOMAIN +'/return.html',
                 response_type: 'token',
                 scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
                 popupConfig: {
@@ -196,7 +193,7 @@ var clickHandlersRegister = {
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: location.origin + "/" + APP_NAME + "/return.html",
+                redirect_uri: DOMAIN +'/return.html',
                 response_type: 'token',
                 scope: appConf.group.scope
             }
@@ -268,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     var uriParams = decodeQ(location.search.slice(1));
     if (uriParams.indexOf('oauth_popup=on') > -1) {
         window.opener.postMessage(location.hash.slice(1), location.origin);
-        //window.close();
+        window.close();
     }
 }, false);
 
