@@ -61,7 +61,7 @@ var OKSDK = (function () {
 
         state.sessionKey = params["session_key"];
         state.accessToken = hParams['access_token'];
-        state.groupId = params['group_id'] || hParams['group_id'];
+        state.groupId = params['group_id'] || hParams['group_id'] || args['group_id'];
         state.sessionSecretKey = params["session_secret_key"] || hParams['session_secret_key'];
         state.apiServer = args["api_server"] || params["api_server"] || OK_API_SERVER;
         state.widgetServer = args["widget_server"] || params['widget_server'] || OK_CONNECT_URL;

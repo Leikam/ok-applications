@@ -68,7 +68,7 @@ var clickHandlersRegister = {
     },
     oauthme: function () {
         var query = '';
-        query += appConf.widget_server +'oauth/authorize' +
+        query += appConf.widget_server + 'oauth/authorize' +
             '?client_id=' + appConf.app_id +
             '&scope=' + (appConf.oauth.scope || 'VALUABLE_ACCESS') +
             '&response_type=token' +
@@ -103,6 +103,48 @@ var clickHandlersRegister = {
         });
         //OKSDK.REST.call('auth.logoutAll', {}, stub_callback); // PERMISSION_DENIED : This method is allowed for internal applications only
     },
+    getGroups: function () {
+        var inited = false;
+        callRestMethod('group.getUserGroupsInfo',
+            {fields: '*'},
+            function (status, data, error) {
+                console.log('group.getUserGroupsInfo', status, data, error);
+                if (status == 'ok') {
+                    //var fragment = document.createDocumentFragment();
+                    var result = '';
+                    data.userGroups.forEach(function (group) {
+                        result +=
+                            '<img src="' + group.picAvatar + '"/>' +
+                            group.name.bold() + ': ' +
+                            '<button class="js-append-groupId">' + group.groupId + '</button>' +
+                            '\n';
+                    });
+                    content.innerHTML = result;
+                }
+
+                if (!inited) {
+                    content.addEventListener('click', function (e) {
+                        var target = e.target;
+                        if (target && target.className.match(/\bjs-append-groupId\b/)) {
+                            var groupId = target.textContent;
+                            appConf.group_id = groupId;
+                            console.log('appConf.group_id set to ', groupId);
+
+                            var hash = location.hash;
+                            var search = location.search;
+                            if (hash.indexOf('group_id=') == -1 || search.indexOf('group_id=') == -1) {
+                                search.length > 0
+                                    ? location.search += ('&group_id=' + groupId)
+                                    : location.hash += ('&group_id=' + groupId);
+
+                            }
+                        }
+                    });
+
+                    inited = true;
+                }
+            });
+    },
     requestPayment: function (e) {
         var opts = {
             //mob_pay_url: 'paymentnew.ok.ru'
@@ -124,14 +166,14 @@ var clickHandlersRegister = {
         };
         var params = {
             attachment: JSON.stringify(attachment),
-            return: DOMAIN +'/return.html',
+            return: DOMAIN + '/return.html',
             popup: 'off',
             utext: 'on',
             silent: 'off',
             popupConfig: popupConfig
         };
 
-         //by REST
+        //by REST
         //OKSDK.REST.call('mediatopic.post', params,  stub_callback);
 
         // by shortcuts
@@ -150,7 +192,7 @@ var clickHandlersRegister = {
             'OAuth2Permissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: DOMAIN +'/return.html',
+                redirect_uri: DOMAIN + '/return.html',
                 response_type: 'token',
                 scope: appConf.oauth.scope,
                 show_permissions: true
@@ -159,11 +201,16 @@ var clickHandlersRegister = {
         method.run();
     },
     requestChatPermission: function () {
+        if (!appConf.group_id) {
+            alert('Не указан ID группы');
+        }
+
         var method = new OKSDK.MethodConstructor(
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: DOMAIN +'/return.html',
+                groupId: appConf.group_id,
+                redirect_uri: DOMAIN + '/return.html',
                 response_type: 'token',
                 scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
             }
@@ -171,11 +218,16 @@ var clickHandlersRegister = {
         method.run();
     },
     requestPostingPermission: function () {
+        if (!appConf.group_id) {
+            alert('Не указан ID группы');
+        }
+
         var method = new OKSDK.MethodConstructor(
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: DOMAIN +'/return.html',
+                groupId: appConf.group_id,
+                redirect_uri: DOMAIN + '/return.html',
                 response_type: 'token',
                 scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
                 popupConfig: {
@@ -189,11 +241,16 @@ var clickHandlersRegister = {
         method.run();
     },
     requestAllGroupPermissions: function () {
+        if (!appConf.group_id) {
+            alert('Не указан ID группы');
+        }
+
         var method = new OKSDK.MethodConstructor(
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
-                redirect_uri: DOMAIN +'/return.html',
+                groupId: appConf.group_id,
+                redirect_uri: DOMAIN + '/return.html',
                 response_type: 'token',
                 scope: appConf.group.scope
             }
@@ -226,17 +283,15 @@ var clickHandlersRegister = {
                     content.appendChild(document.createTextNode(result));
                     content.appendChild(fragment);
                 }
-                console.log('users.getCurrentUser', arguments);
             }
         );
     },
     openWindow: function (e) {
         var elem = document.getElementById('openWindowData');
         window.name = 'parent';
-        targetWindow = window.open(('./'+elem.value+'.html') || '/');
+        targetWindow = window.open(('./' + elem.value + '.html') || '/');
     }
 };
-
 
 
 /* Пример обработки авторизации на основной странице */
@@ -250,7 +305,7 @@ window.addEventListener('message', function (e) {
             if (event === 'returned') {
                 document.body.removeChild(document.getElementsByClassName('ok-sdk-frame')[0]);
             }
-        // проверка на запрос авторизации
+            // проверка на запрос авторизации
         } else if (data.indexOf && data.indexOf('access_token=') > -1) {
             console.log('-> Relogin.');
             location.hash = data;
