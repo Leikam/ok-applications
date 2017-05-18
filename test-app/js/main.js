@@ -116,17 +116,19 @@ var clickHandlersRegister = {
                         result +=
                             '<img src="' + group.picAvatar + '"/>' +
                             group.name.bold() + ': ' +
-                            '<button class="js-append-groupId">' + group.groupId + '</button>' +
+                            '<button class="js-append-groupId" value="'+ group.groupId +'">скопировать ID:' + group.groupId + '</button>' +
                             '\n';
                     });
                     content.innerHTML = result;
+                } else {
+                    return alert(error.error_code + '\t' + error.error_msg + '\n' + error.error_data);
                 }
 
                 if (!inited) {
                     content.addEventListener('click', function (e) {
                         var target = e.target;
                         if (target && target.className.match(/\bjs-append-groupId\b/)) {
-                            var groupId = target.textContent;
+                            var groupId = target.value;
                             appConf.group_id = groupId;
                             console.log('appConf.group_id set to ', groupId);
 
@@ -202,7 +204,7 @@ var clickHandlersRegister = {
     },
     requestChatPermission: function () {
         if (!appConf.group_id) {
-            alert('Не указан ID группы');
+            return alert('Не указан ID группы. Откройте все группы пользователя и выберите нежный ID, кликнув по кнопке');
         }
 
         var method = new OKSDK.MethodConstructor(
@@ -219,7 +221,7 @@ var clickHandlersRegister = {
     },
     requestPostingPermission: function () {
         if (!appConf.group_id) {
-            alert('Не указан ID группы');
+            return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
         var method = new OKSDK.MethodConstructor(
@@ -242,7 +244,7 @@ var clickHandlersRegister = {
     },
     requestAllGroupPermissions: function () {
         if (!appConf.group_id) {
-            alert('Не указан ID группы');
+            return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
         var method = new OKSDK.MethodConstructor(
