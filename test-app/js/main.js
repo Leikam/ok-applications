@@ -189,7 +189,7 @@ var clickHandlersRegister = {
         postMediatopc.run();
 
     },
-    askPermissions: function (e) {
+    requestPermissions: function (e) {
         var method = new OKSDK.MethodConstructor(
             'OAuth2Permissions',
             {
@@ -282,6 +282,7 @@ var clickHandlersRegister = {
                         result += k + ": " + dataElement + ";\f\n";
                     }
 
+                    content.innerHTML = '';
                     content.appendChild(document.createTextNode(result));
                     content.appendChild(fragment);
                 }
