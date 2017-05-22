@@ -185,12 +185,12 @@ var clickHandlersRegister = {
         //OKSDK.invokeUIMethod('postMediatopic', JSON.stringify(attachment));
 
         // by method contructor
-        var postMediatopc = new OKSDK.MethodConstructor('WidgetMediatopicPost', params);
+        var postMediatopc = new OKSDK.Widgets.Builder('WidgetMediatopicPost', params);
         postMediatopc.run();
 
     },
     requestPermissions: function (e) {
-        var method = new OKSDK.MethodConstructor(
+        var method = new OKSDK.Widgets.Builder(
             'OAuth2Permissions',
             {
                 client_id: appConf.app_id,
@@ -207,7 +207,7 @@ var clickHandlersRegister = {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нежный ID, кликнув по кнопке');
         }
 
-        var method = new OKSDK.MethodConstructor(
+        var method = new OKSDK.Widgets.Builder(
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
@@ -224,7 +224,7 @@ var clickHandlersRegister = {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
-        var method = new OKSDK.MethodConstructor(
+        var method = new OKSDK.Widgets.Builder(
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
@@ -247,7 +247,7 @@ var clickHandlersRegister = {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
-        var method = new OKSDK.MethodConstructor(
+        var method = new OKSDK.Widgets.Builder(
             'WidgetGroupAppPermissions',
             {
                 client_id: appConf.app_id,
