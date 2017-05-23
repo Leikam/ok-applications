@@ -1,6 +1,7 @@
 console.log('init location: ', location);
 
 var DOMAIN = serverConfig.app_domain || 'ok.ru';
+var WIDGET_REGISTER = {};
 
 OKSDK.init(appConf, init_success, init_failure);
 
@@ -37,6 +38,30 @@ function init_success() {
             linkToFeed.style.display = 'none';
         }
     });
+
+    WIDGET_REGISTER['OAuth2Permissions'] = new OKSDK.Widgets.Builder(
+        'OAuth2Permissions',
+        {
+            client_id: appConf.app_id,
+            redirect_uri: DOMAIN + '/return.html',
+            response_type: 'token',
+            scope: appConf.oauth.scope,
+            show_permissions: true
+        }
+    );
+
+    WIDGET_REGISTER['WidgetGroupAppPermissions'] = new OKSDK.Widgets.Builder(
+        'WidgetGroupAppPermissions',
+        {
+            client_id: appConf.app_id,
+            groupId: appConf.group_id,
+            redirect_uri: DOMAIN + '/return.html',
+            response_type: 'token',
+            scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
+        }
+    );
+
+    WIDGET_REGISTER['WidgetMediatopicPost'] = new OKSDK.Widgets.Builder('WidgetMediatopicPost');
 
 }
 function init_failure() {
@@ -184,40 +209,19 @@ var clickHandlersRegister = {
         // by ui
         //OKSDK.invokeUIMethod('postMediatopic', JSON.stringify(attachment));
 
-        // by method contructor
-        var postMediatopc = new OKSDK.Widgets.Builder('WidgetMediatopicPost', params);
-        postMediatopc.run();
 
+        WIDGET_REGISTER['WidgetMediatopicPost']
+            .configure(params)
+            .run();
     },
     requestPermissions: function (e) {
-        var method = new OKSDK.Widgets.Builder(
-            'OAuth2Permissions',
-            {
-                client_id: appConf.app_id,
-                redirect_uri: DOMAIN + '/return.html',
-                response_type: 'token',
-                scope: appConf.oauth.scope,
-                show_permissions: true
-            }
-        );
-        method.run();
+        WIDGET_REGISTER['OAuth2Permissions'].run();
     },
     requestChatPermission: function () {
         if (!appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нежный ID, кликнув по кнопке');
         }
-
-        var method = new OKSDK.Widgets.Builder(
-            'WidgetGroupAppPermissions',
-            {
-                client_id: appConf.app_id,
-                groupId: appConf.group_id,
-                redirect_uri: DOMAIN + '/return.html',
-                response_type: 'token',
-                scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
-            }
-        );
-        method.run();
+        WIDGET_REGISTER['WidgetGroupAppPermissions'].run();
     },
     requestPostingPermission: function () {
         if (!appConf.group_id) {
