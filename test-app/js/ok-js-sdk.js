@@ -336,15 +336,15 @@ var OKSDK = (function () {
             }
 
             var popupName = popupConfig.name + Date.now();
-                popup = window.open(
-                    getLinkOnWidget(widget, args),
-                    popupName,
-                    'width=' + w + ',' +
-                    'height=' + h + ',' +
-                    'top=' + top + ',' +
-                    'left=' + left +
-                    (popupConfig.options ? (',' + popupConfig.options) : '')
-                );
+            popup = window.open(
+                getLinkOnWidget(widget, args),
+                popupName,
+                'width=' + w + ',' +
+                'height=' + h + ',' +
+                'top=' + top + ',' +
+                'left=' + left +
+                (popupConfig.options ? (',' + popupConfig.options) : '')
+            );
 
         } else {
             popup = window.open(getLinkOnWidget(widget, args));
@@ -417,12 +417,6 @@ var OKSDK = (function () {
         }
     };
 
-    /**
-     *
-     * @param widget
-     * @param options
-     * @constructor
-     */
     function WidgetLayerBuilder(widget, options) {
         if (widget instanceof WidgetConfigurator && widget.name && !this.handlerConfMap[widget.name]) {
             WidgetLayerBuilder.prototype.handlerConfMap[widget.name] = widget;
