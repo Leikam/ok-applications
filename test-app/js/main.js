@@ -55,8 +55,6 @@ function init_success() {
             response_type: 'token'
         }
     );
-
-    WIDGET_REGISTER.mediatopicPost = new OKSDK.Widgets.Builder(OKSDK.Widgets.builds.mediatopicPost)
 }
 function init_failure() {
     console.error('Initialization failed', this);
@@ -194,11 +192,9 @@ var clickHandlersRegister = {
             popupConfig: popupConfig
         };
 
-        WIDGET_REGISTER.mediatopicPost
-            .addParams(params)
-            .run();
+        OKSDK.Widgets.post(null, params, true);
     },
-    requestPermissions: function (e) {
+    requestPermissions: function () {
         WIDGET_REGISTER.OAuth2Permissions
             .addParams({ scope: appConf.oauth.scope })
             .run();
@@ -207,15 +203,18 @@ var clickHandlersRegister = {
         if (!appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нежный ID, кликнув по кнопке');
         }
+        //// call by builder example:
+        //WIDGET_REGISTER.WidgetGroupAppPermissions
+        //    .addParams(
+        //        {
+        //            groupId: appConf.group_id, // if app is external we need to get groupId first;
+        //            scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
+        //        }
+        //        )
+        //    .run();
 
-        WIDGET_REGISTER.WidgetGroupAppPermissions
-            .addParams(
-                {
-                    groupId: appConf.group_id, // if app is external we need to get groupId first;
-                    scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
-                }
-                )
-            .run();
+        // if app launches as external,  we need to get and set groupId explicitly;
+        OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', { groupId: appConf.group_id });
     },
     requestPostingPermission: function () {
         if (!appConf.group_id) {
