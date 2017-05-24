@@ -61,7 +61,7 @@ function init_success() {
         }
     );
 
-    WIDGET_REGISTER['WidgetMediatopicPost'] = new OKSDK.Widgets.Builder('WidgetMediatopicPost');
+    WIDGET_REGISTER['mediatopicPost'] = new OKSDK.Widgets.Builder(OKSDK.Widgets.configs.mediatopicPost);
 
 }
 function init_failure() {
@@ -210,7 +210,7 @@ var clickHandlersRegister = {
         //OKSDK.invokeUIMethod('postMediatopic', JSON.stringify(attachment));
 
 
-        WIDGET_REGISTER['WidgetMediatopicPost']
+        WIDGET_REGISTER['mediatopicPost']
             .configure(params)
             .run();
     },
