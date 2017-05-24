@@ -39,30 +39,24 @@ function init_success() {
         }
     });
 
-    WIDGET_REGISTER['OAuth2Permissions'] = new OKSDK.Widgets.Builder(
+    WIDGET_REGISTER.OAuth2Permissions = new OKSDK.Widgets.Builder(
         'OAuth2Permissions',
         {
-            client_id: appConf.app_id,
             redirect_uri: DOMAIN + '/return.html',
             response_type: 'token',
-            scope: appConf.oauth.scope,
             show_permissions: true
         }
     );
 
-    WIDGET_REGISTER['WidgetGroupAppPermissions'] = new OKSDK.Widgets.Builder(
+    WIDGET_REGISTER.WidgetGroupAppPermissions = new OKSDK.Widgets.Builder(
         'WidgetGroupAppPermissions',
         {
-            client_id: appConf.app_id,
-            groupId: appConf.group_id,
             redirect_uri: DOMAIN + '/return.html',
-            response_type: 'token',
-            scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
+            response_type: 'token'
         }
     );
 
-    WIDGET_REGISTER['mediatopicPost'] = new OKSDK.Widgets.Builder(OKSDK.Widgets.configs.mediatopicPost);
-
+    WIDGET_REGISTER.mediatopicPost = new OKSDK.Widgets.Builder(OKSDK.Widgets.builds.mediatopicPost)
 }
 function init_failure() {
     console.error('Initialization failed', this);
@@ -200,68 +194,59 @@ var clickHandlersRegister = {
             popupConfig: popupConfig
         };
 
-        //by REST
-        //OKSDK.REST.call('mediatopic.post', params,  stub_callback);
-
-        // by shortcuts
-        //OKSDK.Widgets.post(null, params);
-
-        // by ui
-        //OKSDK.invokeUIMethod('postMediatopic', JSON.stringify(attachment));
-
-
-        WIDGET_REGISTER['mediatopicPost']
-            .configure(params)
+        WIDGET_REGISTER.mediatopicPost
+            .addParams(params)
             .run();
     },
     requestPermissions: function (e) {
-        WIDGET_REGISTER['OAuth2Permissions'].run();
+        WIDGET_REGISTER.OAuth2Permissions
+            .addParams({ scope: appConf.oauth.scope })
+            .run();
     },
     requestChatPermission: function () {
         if (!appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нежный ID, кликнув по кнопке');
         }
-        WIDGET_REGISTER['WidgetGroupAppPermissions'].run();
+
+        WIDGET_REGISTER.WidgetGroupAppPermissions
+            .addParams(
+                {
+                    groupId: appConf.group_id, // if app is external we need to get groupId first;
+                    scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
+                }
+                )
+            .run();
     },
     requestPostingPermission: function () {
         if (!appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
-        var method = new OKSDK.Widgets.Builder(
-            'WidgetGroupAppPermissions',
-            {
-                client_id: appConf.app_id,
-                groupId: appConf.group_id,
-                redirect_uri: DOMAIN + '/return.html',
-                response_type: 'token',
-                scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
-                popupConfig: {
-                    name: "demo_title",
-                    width: 600,
-                    height: 300,
-                    options: 'status=0, menubar=0'
+        WIDGET_REGISTER.WidgetGroupAppPermissions
+            .addParams(
+                {
+                    scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
+                    popupConfig: {
+                        name: "demo_title",
+                        width: 600,
+                        height: 300,
+                        options: 'status=0, menubar=0'
+                    }
                 }
-            }
-        );
-        method.run();
+            )
+            .run();
     },
     requestAllGroupPermissions: function () {
         if (!appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
-        var method = new OKSDK.Widgets.Builder(
-            'WidgetGroupAppPermissions',
-            {
-                client_id: appConf.app_id,
-                groupId: appConf.group_id,
-                redirect_uri: DOMAIN + '/return.html',
-                response_type: 'token',
+        WIDGET_REGISTER.WidgetGroupAppPermissions
+            .addParams({
+                groupId: appConf.group_id, // if app is external we need to get groupId first;
                 scope: appConf.group.scope
-            }
-        );
-        method.run();
+            })
+            .run();
     },
     aboutGroup: function (e) {
         OKSDK.REST.call('group.getInfo', {

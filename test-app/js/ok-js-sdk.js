@@ -400,6 +400,7 @@ var OKSDK = (function () {
     }
 
     WidgetConfigurator.prototype = {
+        /* one of FAPI.UI methods, more: https://apiok.ru/search?q=FAPI.UI */
         withUiLayerName: function(name) {
             this.uiLayerName = name;
             return this;
@@ -413,15 +414,15 @@ var OKSDK = (function () {
             return this;
         },
         withUiAdapter: function(fn) {
-            this.adapters.uiAdapter = fn;
+            this.adapters.openUiLayer = fn;
             return this;
         },
         withPopupAdapter: function(fn) {
-            this.adapters.popupAdapter = fn;
+            this.adapters.openPopup = fn;
             return this;
         },
         withIframeAdapter: function(fn) {
-            this.adapters.iframeAdapter = fn;
+            this.adapters.openIframeLayer = fn;
             return this;
         }
     };
@@ -433,7 +434,7 @@ var OKSDK = (function () {
 
         this.widgetName = widget.name;
         this.handlerConf = widget;
-        this.options = options;
+        this.options = options || {};
 
         var adapters = this.handlerConf.adapters;
         if (adapters) {
@@ -497,6 +498,10 @@ var OKSDK = (function () {
             return result;
         },
         run: function () {
+
+            this.options.client_id = this.options.client_id || state.app_id;
+            this.options.groupId = this.options.groupId || state.groupId;
+
             var validatorRegister = this.validatorRegister;
             for (var method in validatorRegister) {
                 var result = validatorRegister[method].call(this);
@@ -874,6 +879,14 @@ var OKSDK = (function () {
     }
 
     // ---------------------------------------------------------------------------------------------------
+    var mediatopicPost = new WidgetConfigurator('WidgetMediatopicPost')
+        .withUiLayerName('postMediatopic')
+        .withUiAdapter(
+            function (data, options) {
+                return [data.uiLayerName, options.attachment, options.status, options.platforms];
+            }
+        );
+
     return {
         init: init,
         REST: {
@@ -886,15 +899,8 @@ var OKSDK = (function () {
         Widgets: {
             Builder: WidgetLayerBuilder,
             WidgetConfigurator: WidgetConfigurator,
-            configs: {
-                mediatopicPost:
-                    new WidgetConfigurator('WidgetMediatopicPost')
-                        .withUiLayerName('postMediatopic') /* one of FAPI.UI methods, more: https://apiok.ru/search?q=FAPI.UI */
-                        .withUiAdapter(
-                            function (data, options) {
-                                return [data.uiLayerName, options.attachment];
-                            }
-                        )
+            builds: {
+                mediatopicPost: mediatopicPost
             },
             getBackButtonHtml: widgetBackButton,
             post: widgetMediatopicPost,
