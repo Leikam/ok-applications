@@ -286,8 +286,8 @@ var OKSDK = (function () {
         options.attachment = btoa(unescape(encodeURIComponent(toString(options.attachment))));
 
         if (useContext) {
-            var mergerdOptions = OKSDK.Util.mergeObject(options, {return: returnUrl}, false);
-            OKSDK.Widgets.builds.post.configure(mergerdOptions).run();
+            var mergedOptions = OKSDK.Util.mergeObject(options, {return: returnUrl}, false);
+            OKSDK.Widgets.builds.post.configure(mergedOptions).run();
         }
         widgetOpen('WidgetMediatopicPost', options, returnUrl);
     }
@@ -308,7 +308,6 @@ var OKSDK = (function () {
         } else {
             widgetOpen('WidgetInvite', options, returnUrl);
         }
-
     }
 
     /**
@@ -933,8 +932,8 @@ var OKSDK = (function () {
                     new WidgetConfigurator('WidgetMediatopicPost')
                         .withUiLayerName('postMediatopic')
                         .withUiAdapter(function (data, options) {
-                                return [data.uiLayerName, options.attachment, options.status, options.platforms];
-                            })
+                            return [data.uiLayerName, options.attachment, options.status, options.platforms];
+                        })
                 ),
                 invite: new WidgetLayerBuilder(
                     new WidgetConfigurator('WidgetInvite')
