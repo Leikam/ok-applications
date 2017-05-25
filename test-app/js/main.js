@@ -184,7 +184,7 @@ var clickHandlersRegister = {
             options: 'status=0, menubar=0'
         };
         var params = {
-            attachment: JSON.stringify(attachment),
+            attachment: attachment,
             return: DOMAIN + '/return.html',
             popup: 'off',
             utext: 'on',
