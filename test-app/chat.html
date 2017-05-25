@@ -4,44 +4,65 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Content-Style-Type" content="text/css">
     <title></title>
-    <meta name="Generator" content="Cocoa HTML Writer">
-    <meta name="CocoaVersion" content="1504.82">
     <style type="text/css">
-        body {background-color: #ff0000}
+        body {background-color: #d6d6d6}
         span.s1 {font-kerning: none; background-color: #ffff00}
     </style>
 </head>
 <body>
-<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; line-height: 28.0px; font: 24.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Todos</b></span></h1>
-<!--<button onclick="window.open('file:///Users/vladimir.gordeev/Downloads/close.html')">open</button><br>-->
+
+<h1 id="title">
+    Parent
+</h1>
+
 <button id="openButton">open</button><br>
 <button id="sendButton">отправить сообщение</button><input id='msg' type="text"/><br>
+<button id="focusButton">вернуться в другое окно</button>
 <button onclick="window.close()">close</button>
 <br><br>
 <div id="field">
     поле для переписки
 </div>
 
-
 <script>
-    var PATH = 'file:///Users/dmitrylapynov/odkl/ok-applications/api-test-app/chat.html';
+//    var PATH = 'file:///Users/dmitrylapynov/odkl/ok-app/ok-applications/test-app/chat.html';
+    var PATH = '/ok-applications/test-app/chat.html';
     var openButton = document.getElementById('openButton');
     var sendButton = document.getElementById('sendButton');
+    var focusButton = document.getElementById('focusButton');
     var field = document.getElementById('field');
     var msg = document.getElementById('msg');
     var child = null;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.opener && window.opener !== window) {
+            window.name = 'child';
+            document.getElementById('title').innerHTML = 'Child';
+        } else {
+            window.name = 'parent';
+        }
+    }, false);
 
     openButton.addEventListener('click', function () {
         child = window.open(PATH);
         console.log('opened', child)
     });
-    
+
+    var target;
     sendButton.addEventListener('click', function () {
-        var target = window.opener || child;
+        target = window.opener || child;
         if (target) {
             target.postMessage({text: msg.value}, "*");
         } else {
             alert('Нет таргета');
+        }
+    });
+
+    focusButton.addEventListener('click', function () {
+        if (window.opener) {
+            window.open('', window.opener.name);
+        } else {
+            target && target.focus();
         }
     });
 
