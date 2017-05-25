@@ -170,7 +170,7 @@ var clickHandlersRegister = {
         };
         OKSDK.Payment.show("Banana", "200", "777", opts);
     },
-    postingFeed: function (e) {
+    _post: function (e) {
         var attachment = {
             media: [{
                 type: 'text',
@@ -193,6 +193,12 @@ var clickHandlersRegister = {
         };
 
         OKSDK.Widgets.post(null, params, true);
+    },
+    _invite: function () {
+        OKSDK.Widgets.invite(null, null, true);
+    },
+    _suggest: function () {
+        OKSDK.Widgets.suggest(null, null, true);
     },
     requestPermissions: function () {
         WIDGET_REGISTER.OAuth2Permissions
