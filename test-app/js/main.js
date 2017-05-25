@@ -192,13 +192,13 @@ var clickHandlersRegister = {
             popupConfig: popupConfig
         };
 
-        OKSDK.Widgets.post(null, params, true);
+        OKSDK.Widgets.post(null, params);
     },
     _invite: function () {
-        OKSDK.Widgets.invite(null, null, true);
+        OKSDK.Widgets.invite(null, null);
     },
     _suggest: function () {
-        OKSDK.Widgets.suggest(null, null, true);
+        OKSDK.Widgets.suggest(null, null);
     },
     requestPermissions: function () {
         WIDGET_REGISTER.OAuth2Permissions
