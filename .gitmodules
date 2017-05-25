@@ -1,0 +1,3 @@
+[submodule "libs/ok-js-sdk"]
+	path = libs/ok-js-sdk
+	url = https://github.com/odnoklassniki/ok-js-sdk
