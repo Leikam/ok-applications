@@ -206,7 +206,7 @@ var clickHandlersRegister = {
             .run();
     },
     requestChatPermission: function () {
-        if (!appConf.group_id) {
+        if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нежный ID, кликнув по кнопке');
         }
         //// call by builder example:
@@ -223,7 +223,7 @@ var clickHandlersRegister = {
         OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', { groupId: appConf.group_id });
     },
     requestPostingPermission: function () {
-        if (!appConf.group_id) {
+        if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
@@ -242,7 +242,7 @@ var clickHandlersRegister = {
             .run();
     },
     requestAllGroupPermissions: function () {
-        if (!appConf.group_id) {
+        if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
             return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
         }
 
