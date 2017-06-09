@@ -206,9 +206,6 @@ var clickHandlersRegister = {
             .run();
     },
     requestChatPermission: function () {
-        if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
-            return alert('Не указан ID группы. Откройте все группы пользователя и выберите нежный ID, кликнув по кнопке');
-        }
         //// call by builder example:
         //WIDGET_REGISTER.WidgetGroupAppPermissions
         //    .addParams(
@@ -223,10 +220,6 @@ var clickHandlersRegister = {
         OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', { groupId: appConf.group_id });
     },
     requestPostingPermission: function () {
-        if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
-            return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
-        }
-
         WIDGET_REGISTER.WidgetGroupAppPermissions
             .addParams(
                 {
@@ -242,9 +235,9 @@ var clickHandlersRegister = {
             .run();
     },
     requestAllGroupPermissions: function () {
-        if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
-            return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
-        }
+        //if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
+        //    return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
+        //}
 
         WIDGET_REGISTER.WidgetGroupAppPermissions
             .addParams({
