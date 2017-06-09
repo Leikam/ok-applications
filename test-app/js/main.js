@@ -1,4 +1,4 @@
-console.log('init location: ', location);
+window.console && console.log('init location: ', location);
 
 var DOMAIN = serverConfig.app_domain || 'ok.ru';
 var WIDGET_REGISTER = {};
@@ -6,7 +6,7 @@ var WIDGET_REGISTER = {};
 OKSDK.init(appConf, init_success, init_failure);
 
 function init_success() {
-    console.info('Initialization success');
+    window.console && console.info('Initialization success');
 
     getCurrentUserData(function (data) {
         var fragment = document.createDocumentFragment();
@@ -57,22 +57,22 @@ function init_success() {
     );
 }
 function init_failure() {
-    console.error('Initialization failed', this);
+    window.console && console.error('Initialization failed', this);
 }
 
 function API_callback(method, result, data) {
     errorHandler(method, result, data);
-    console.log("Global API callback.\nMethod[0]: %s,\n result[1]: %o,\n data[2]: %o", method, result, data);
+    window.console && console.log("Global API callback.\nMethod[0]: %s,\n result[1]: %o,\n data[2]: %o", method, result, data);
 }
 
 function stub_callback(method, result, data) {
     errorHandler(method, result, data);
-    console.log("Stub callback.\nMethod[0]: %s,\n result[1]: %o,\n data[2]: %o", method, result, data);
+    window.console && console.log("Stub callback.\nMethod[0]: %s,\n result[1]: %o,\n data[2]: %o", method, result, data);
 }
 
 function callRestMethod(method, opts, callback) {
     OKSDK.REST.call(method, (opts || {}), (callback || stub_callback));
-    console.log(method + ' called');
+    window.console && console.log(method + ' called');
 }
 
 var content = document.getElementsByClassName('content')[0],
@@ -102,7 +102,7 @@ var clickHandlersRegister = {
             t: 0
         };
         var target = window.open(query, 'авторизация', 'left=100, top=0, width=600, height=450');
-        console.log(query);
+        window.console && console.log(query);
     },
     loginMe: function () {
         //var config = {
@@ -125,7 +125,6 @@ var clickHandlersRegister = {
         callRestMethod('group.getUserGroupsInfo',
             {fields: '*'},
             function (status, data, error) {
-                console.log('group.getUserGroupsInfo', status, data, error);
                 if (status == 'ok') {
                     //var fragment = document.createDocumentFragment();
                     var result = '';
@@ -133,7 +132,7 @@ var clickHandlersRegister = {
                         result +=
                             '<img src="' + group.picAvatar + '"/>' +
                             group.name.bold() + ': ' +
-                            '<button class="js-append-groupId" value="'+ group.groupId +'">скопировать ID:' + group.groupId + '</button>' +
+                            '<button class="js-append-groupId" value="' + group.groupId + '">скопировать ID:' + group.groupId + '</button>' +
                             '\n';
                     });
                     content.innerHTML = result;
@@ -147,7 +146,6 @@ var clickHandlersRegister = {
                         if (target && target.className.match(/\bjs-append-groupId\b/)) {
                             var groupId = target.value;
                             appConf.group_id = groupId;
-                            console.log('appConf.group_id set to ', groupId);
 
                             var hash = location.hash;
                             var search = location.search;
@@ -202,7 +200,7 @@ var clickHandlersRegister = {
     },
     requestPermissions: function () {
         WIDGET_REGISTER.OAuth2Permissions
-            .addParams({ scope: appConf.oauth.scope })
+            .addParams({scope: appConf.oauth.scope})
             .run();
     },
     requestChatPermission: function () {
@@ -217,7 +215,7 @@ var clickHandlersRegister = {
         //    .run();
 
         // if app launches as external,  we need to get and set groupId explicitly;
-        OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', { groupId: appConf.group_id });
+        OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', {groupId: appConf.group_id});
     },
     requestPostingPermission: function () {
         WIDGET_REGISTER.WidgetGroupAppPermissions
@@ -286,7 +284,7 @@ var clickHandlersRegister = {
 
 /* Пример обработки авторизации на основной странице */
 window.addEventListener('message', function (e) {
-    console.log('-> Message received: ', e.data);
+    window.console && console.log('-> Message received: ', e.data);
     var data = e.data;
     if (data) {
         var event = data.event;
@@ -297,7 +295,6 @@ window.addEventListener('message', function (e) {
             }
             // проверка на запрос авторизации
         } else if (data.indexOf && data.indexOf('access_token=') > -1) {
-            console.log('-> Relogin.');
             location.hash = data;
             OKSDK.init(appConf, init_success, init_failure);
         }
@@ -324,7 +321,7 @@ document.body.addEventListener('click', {
             if (id && clickHandlersRegister[id]) {
                 clickHandlersRegister[id].call(window, e);
             } else {
-                console.warn('Нет такого обработчика');
+                window.console && console.warn('Нет такого обработчика');
             }
 
         }
