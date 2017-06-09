@@ -80,8 +80,12 @@ var content = document.getElementsByClassName('content')[0],
     locationObj = {};
 
 var clickHandlersRegister = {
-    testAnyFunc: function (e) {
-
+    testAnyFunc: function (e) {},
+    cleanConfig: function(e) {
+        e.preventDefault();
+        appConf.widget_server = undefined;
+        appConf.api_server = undefined;
+        window.console && console.log('widget_server & api_server cleared.');
     },
     oauthme: function () {
         var query = '';
