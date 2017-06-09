@@ -53,7 +53,7 @@ function init_success() {
     );
 
     WIDGET_REGISTER.WidgetGroupAppPermissions = new OKSDK.Widgets.Builder(
-        'WidgetGroupAppPermissions',
+        OKSDK.Widgets.builds.askGroupAppPermissions,
         {
             redirect_uri: DOMAIN + '/return.html',
             response_type: 'token'
