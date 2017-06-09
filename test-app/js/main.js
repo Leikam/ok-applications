@@ -3,10 +3,15 @@ window.console && console.log('init location: ', location);
 var DOMAIN = serverConfig.app_domain || 'ok.ru';
 var WIDGET_REGISTER = {};
 
+var hrefQuery = location.search;
+var confParamName = 'app_conf';
+
+prepareConfig();
+
 OKSDK.init(appConf, init_success, init_failure);
 
 function init_success() {
-    window.console && console.info('Initialization success');
+    window.console && console.info('Initialization success', appConf);
 
     getCurrentUserData(function (data) {
         var fragment = document.createDocumentFragment();
@@ -81,12 +86,7 @@ var content = document.getElementsByClassName('content')[0],
 
 var clickHandlersRegister = {
     testAnyFunc: function (e) {},
-    cleanConfig: function(e) {
-        e.preventDefault();
-        appConf.widget_server = undefined;
-        appConf.api_server = undefined;
-        window.console && console.log('widget_server & api_server cleared.');
-    },
+    cleanConfig: function(e) {},
     oauthme: function () {
         var query = '';
         query += appConf.widget_server + 'oauth/authorize' +
@@ -285,6 +285,30 @@ var clickHandlersRegister = {
     }
 };
 
+function prepareConfig() {
+    if (hrefQuery.indexOf(confParamName) > -1) {
+        var nameValuePairs = hrefQuery.slice(1).split('=');
+        var configModeValue = nameValuePairs[nameValuePairs.indexOf(confParamName) + 1];
+
+        switch (configModeValue) {
+            case 'dev':
+                console.log('Start in dev mode');
+                break;
+            case 'test':
+                console.log('Start in test mode');
+                break;
+            case 'prod':
+                delete appConf.api_server;
+                delete appConf.widget_server;
+                delete appConf.oauth.layout;
+                console.log('Start in prod mode');
+                break;
+            default:
+                console.log('default');
+                console.log('Start in default mode');
+        }
+    }
+}
 
 /* Пример обработки авторизации на основной странице */
 window.addEventListener('message', function (e) {
