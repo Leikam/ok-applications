@@ -3,9 +3,6 @@ window.console && console.log('init location: ', location);
 var DOMAIN = serverConfig.app_domain || 'ok.ru';
 var WIDGET_REGISTER = {};
 
-var hrefQuery = location.search;
-var confParamName = 'app_conf';
-
 prepareConfig();
 
 OKSDK.init(appConf, init_success, init_failure);
@@ -286,9 +283,17 @@ var clickHandlersRegister = {
 };
 
 function prepareConfig() {
+    var hrefQuery = location.search;
+    var confParamName = 'app_conf';
     if (hrefQuery.indexOf(confParamName) > -1) {
-        var nameValuePairs = hrefQuery.slice(1).split('=');
-        var configModeValue = nameValuePairs[nameValuePairs.indexOf(confParamName) + 1];
+        var paramPairs = hrefQuery.slice(1).split('&');
+        var paramMap = {};
+        for (var i = 0, l = paramPairs.length; i < l; i++) {
+            var pair = paramPairs[i];
+            var nameValue = pair.split('=');
+            paramMap[nameValue[0]] = nameValue[1];
+        }
+        var configModeValue = paramMap[confParamName];
 
         switch (configModeValue) {
             case 'dev':
