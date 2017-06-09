@@ -9,6 +9,8 @@ OKSDK.init(appConf, init_success, init_failure);
 
 function init_success() {
     window.console && console.info('Initialization success', appConf);
+    window.console && console.info('hash', location.hash.split('&'));
+    window.console && console.info('query', location.search.split('&'));
 
     getCurrentUserData(function (data) {
         var fragment = document.createDocumentFragment();
