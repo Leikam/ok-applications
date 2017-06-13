@@ -2,7 +2,7 @@ var appConf = {
     app_id: serverConfig.app.app_id,
     app_key: serverConfig.app.app_key,
     group: {
-        scope: [
+        fullScope: [
             'MESSAGES_FROM_GROUP',
             'GROUP_BOT_API_TOKEN'
         ].join(';'),

@@ -51,14 +51,6 @@ function init_success() {
             show_permissions: true
         }
     );
-
-    WIDGET_REGISTER.WidgetGroupAppPermissions = new OKSDK.Widgets.Builder(
-        OKSDK.Widgets.builds.askGroupAppPermissions,
-        {
-            redirect_uri: DOMAIN + '/return.html',
-            response_type: 'token'
-        }
-    );
 }
 function init_failure() {
     window.console && console.error('Initialization failed', this);
@@ -207,22 +199,12 @@ var clickHandlersRegister = {
             .run();
     },
     requestChatPermission: function () {
-        //// call by builder example:
-        //WIDGET_REGISTER.WidgetGroupAppPermissions
-        //    .addParams(
-        //        {
-        //            groupId: appConf.group_id, // if app is external we need to get groupId first;
-        //            scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
-        //        }
-        //        )
-        //    .run();
-
         // if app launches as external,  we need to get and set groupId explicitly;
         OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', {groupId: appConf.group_id});
     },
     requestPostingPermission: function () {
-        WIDGET_REGISTER.WidgetGroupAppPermissions
-            .addParams(
+        OKSDK.Widgets.builds.askGroupAppPermissions
+            .configure(
                 {
                     groupId: appConf.group_id,
                     scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
@@ -237,14 +219,10 @@ var clickHandlersRegister = {
             .run();
     },
     requestAllGroupPermissions: function () {
-        //if (OKSDK.Util.resolveContext().isExternal && !appConf.group_id) {
-        //    return alert('Не указан ID группы. Откройте все группы пользователя и выберите нужный ID, кликнув по кнопке');
-        //}
-
-        WIDGET_REGISTER.WidgetGroupAppPermissions
-            .addParams({
-                groupId: appConf.group_id, // if app is external we need to get groupId first;
-                scope: appConf.group.scope
+        OKSDK.Widgets.builds.askGroupAppPermissions
+            .configure({
+                groupId: appConf.group_id,
+                scope: appConf.group.fullScope // both: 'MESSAGES_FROM_GROUP', 'GROUP_BOT_API_TOKEN'
             })
             .run();
     },
