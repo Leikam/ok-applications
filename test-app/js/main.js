@@ -224,6 +224,7 @@ var clickHandlersRegister = {
         WIDGET_REGISTER.WidgetGroupAppPermissions
             .addParams(
                 {
+                    groupId: appConf.group_id,
                     scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
                     popupConfig: {
                         name: "demo_title",
