@@ -51,6 +51,11 @@ function init_success() {
             show_permissions: true
         }
     );
+
+    WIDGET_REGISTER.groupPermission = OKSDK.Widgets.builds.askGroupAppPermissions.configure({
+        redirect_uri: DOMAIN + '/return.html',
+        response_type: 'token'
+    });
 }
 function init_failure() {
     window.console && console.error('Initialization failed', this);
@@ -203,24 +208,22 @@ var clickHandlersRegister = {
         OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', {groupId: appConf.group_id});
     },
     requestPostingPermission: function () {
-        OKSDK.Widgets.builds.askGroupAppPermissions
-            .configure(
-                {
-                    groupId: appConf.group_id,
-                    scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
-                    popupConfig: {
-                        name: "demo_title",
-                        width: 600,
-                        height: 300,
-                        options: 'status=0, menubar=0'
-                    }
+        WIDGET_REGISTER.groupPermission
+            .changeParams({
+                groupId: appConf.group_id,
+                scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
+                popupConfig: {
+                    name: "demo_title",
+                    width: 600,
+                    height: 300,
+                    options: 'status=0, menubar=0'
                 }
-            )
+            })
             .run();
     },
     requestAllGroupPermissions: function () {
-        OKSDK.Widgets.builds.askGroupAppPermissions
-            .configure({
+        WIDGET_REGISTER.groupPermission
+            .changeParams({
                 groupId: appConf.group_id,
                 scope: appConf.group.fullScope // both: 'MESSAGES_FROM_GROUP', 'GROUP_BOT_API_TOKEN'
             })
