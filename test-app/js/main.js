@@ -205,7 +205,7 @@ var clickHandlersRegister = {
     },
     requestChatPermission: function () {
         // if app launches as external,  we need to get and set groupId explicitly;
-        OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', {groupId: appConf.group_id});
+        OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', { groupId: appConf.group_id });
     },
     requestPostingPermission: function () {
         WIDGET_REGISTER.groupPermission
