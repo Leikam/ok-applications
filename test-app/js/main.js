@@ -92,7 +92,7 @@ var clickHandlersRegister = {
             '&show_permissions=on' +
             // параметр ?oauth_popup=on является якорем для логики обработки редиректов на ту же страницу
             '&redirect_uri=' + location.origin + location.pathname + '?oauth_popup=on' +
-            '&layout=' + (appConf.oauth.layout || 'a') +
+            //'&layout=' + (appConf.oauth.layout || 'a') +
             '&state=' + (appConf.oauth.state || '');
 
         var popupConf = {
@@ -322,7 +322,7 @@ window.addEventListener('message', function (e) {
 для получения параметров, отсылаем их главной странице и закрываем */
 document.addEventListener('DOMContentLoaded', function (e) {
     var uriParams = decodeQ(location.search.slice(1));
-    if (uriParams.indexOf('oauth_popup=on') > -1) {
+    if (uriParams.indexOf('oauth_popup=on') > -1 && window.opener !== window) {
         window.opener.postMessage(location.hash.slice(1), location.origin);
         window.close();
     }

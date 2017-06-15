@@ -26,8 +26,8 @@ var appConf = {
             'PHOTO_CONTENT',
             'SETTINGS',
             'LIKE'
-        ].join(';'),
-        layout: "w"
+        ].join(';')
+        //, layout: "w"
     },
     widget_server: serverConfig.widget_server,
     api_server: serverConfig.api_server
