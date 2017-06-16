@@ -204,11 +204,39 @@ var clickHandlersRegister = {
             .run();
     },
     requestChatPermission: function () {
-        // if app launches as external,  we need to get and set groupId explicitly;
         WIDGET_REGISTER.groupPermission
             .changeParams({
                 groupId: appConf.group_id,
                 scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
+                popupConfig: {
+                    name: "demo_title",
+                    width: 600,
+                    height: 300,
+                    options: 'status=0, menubar=0'
+                }
+            })
+            .run();
+    },
+    requestChatPermission_1: function () {
+        WIDGET_REGISTER.groupPermission
+            .changeParams({
+                groupId: appConf.group_id,
+                scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
+                popupConfig: {
+                    name: "demo_title",
+                    width: 600,
+                    height: 300,
+                    options: 'status=0, menubar=0'
+                }
+            })
+            .run();
+    },
+    requestChatPermission_2: function () {
+        // if app launches as external,  we need to get and set groupId explicitly;
+        WIDGET_REGISTER.groupPermission
+            .changeParams({
+                groupId: appConf.group_id,
+                scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
                 popupConfig: {
                     name: "demo_title",
                     width: 600,
