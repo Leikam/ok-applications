@@ -315,6 +315,7 @@ function prepareConfig() {
                 console.log('>> TEST mode <<');
                 appConf.widget_server = 'https://test.ok.ru/';
                 appConf.api_server = 'https://apitest.ok.ru/';
+                // TODO:
                 //appConf.app_id = "1250486784";
                 //appConf.app_key = "CBALOJILEBABABABA";
                 break;
