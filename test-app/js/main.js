@@ -315,8 +315,8 @@ function prepareConfig() {
                 console.log('>> TEST mode <<');
                 appConf.widget_server = 'https://test.ok.ru/';
                 appConf.api_server = 'https://apitest.ok.ru/';
-                appConf.app_id = "1250486784";
-                appConf.app_key = "CBALOJILEBABABABA";
+                //appConf.app_id = "1250486784";
+                //appConf.app_key = "CBALOJILEBABABABA";
                 break;
             case 'prod':
                 console.log('>> PROD mode <<');
