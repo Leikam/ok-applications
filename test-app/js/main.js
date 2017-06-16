@@ -175,28 +175,28 @@ var clickHandlersRegister = {
                 text: 'Mock test for posting. Stamp: ' + Date.now()
             }]
         };
-        var popupConfig = {
-            name: "demo_title",
-            width: 600,
-            height: 500,
-            options: 'status=0, menubar=0'
-        };
+
         var params = {
             attachment: attachment,
             return: DOMAIN + 'return.html',
             popup: 'off',
             utext: 'on',
             silent: 'off',
-            popupConfig: popupConfig
+            popupConfig: {
+                name: "demo_title",
+                width: 600,
+                height: 500,
+                options: 'status=0, menubar=0'
+            }
         };
 
-        OKSDK.Widgets.post(null, params);
+        OKSDK.Widgets.post(DOMAIN + 'return.html', params);
     },
     _invite: function () {
-        OKSDK.Widgets.invite(null, null);
+        OKSDK.Widgets.invite(DOMAIN + 'return.html', null);
     },
     _suggest: function () {
-        OKSDK.Widgets.suggest(null, null);
+        OKSDK.Widgets.suggest(DOMAIN + 'return.html', null);
     },
     requestPermissions: function () {
         WIDGET_REGISTER.OAuth2Permissions
@@ -309,16 +309,20 @@ function prepareConfig() {
 
         switch (configModeValue) {
             case 'dev':
-                console.log('Start in dev mode');
+                console.log('>> DEV mode <<');
                 break;
             case 'test':
-                console.log('Start in test mode');
+                console.log('>> TEST mode <<');
+                appConf.widget_server = 'https://test.ok.ru/';
+                appConf.api_server = 'https://apitest.ok.ru/';
+                appConf.app_id = "1250486784";
+                appConf.app_key = "CBALOJILEBABABABA";
                 break;
             case 'prod':
+                console.log('>> PROD mode <<');
                 delete appConf.api_server;
                 delete appConf.widget_server;
                 delete appConf.oauth.layout;
-                console.log('Start in prod mode');
                 break;
             default:
                 console.log('default');
