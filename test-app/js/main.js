@@ -46,14 +46,14 @@ function init_success() {
     WIDGET_REGISTER.OAuth2Permissions = new OKSDK.Widgets.Builder(
         'OAuth2Permissions',
         {
-            redirect_uri: DOMAIN + '/return.html',
+            redirect_uri: DOMAIN + 'return.html',
             response_type: 'token',
             show_permissions: true
         }
     );
 
     WIDGET_REGISTER.groupPermission = OKSDK.Widgets.builds.askGroupAppPermissions.configure({
-        redirect_uri: DOMAIN + '/return.html',
+        redirect_uri: DOMAIN + 'return.html',
         response_type: 'token'
     });
 }
@@ -183,7 +183,7 @@ var clickHandlersRegister = {
         };
         var params = {
             attachment: attachment,
-            return: DOMAIN + '/return.html',
+            return: DOMAIN + 'return.html',
             popup: 'off',
             utext: 'on',
             silent: 'off',
@@ -233,7 +233,7 @@ var clickHandlersRegister = {
     },
     requestChatPermission_2: function () {
         // if app launches as external,  we need to get and set groupId explicitly;
-        OKSDK.Widgets.askGroupAppPermissions(appConf.group.scopeMap.GROUP_BOT_API_TOKEN, DOMAIN + '/return.html', { groupId: appConf.group_id });
+        OKSDK.Widgets.askGroupAppPermissions(appConf.group.scopeMap.GROUP_BOT_API_TOKEN, DOMAIN + 'return.html', { groupId: appConf.group_id });
     },
     requestPostingPermission: function () {
         WIDGET_REGISTER.groupPermission
