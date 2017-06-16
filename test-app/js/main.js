@@ -233,19 +233,7 @@ var clickHandlersRegister = {
     },
     requestChatPermission_2: function () {
         // if app launches as external,  we need to get and set groupId explicitly;
-        WIDGET_REGISTER.groupPermission
-            .changeParams({
-                groupId: appConf.group_id,
-                scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
-                popupConfig: {
-                    name: "demo_title",
-                    width: 600,
-                    height: 300,
-                    options: 'status=0, menubar=0'
-                }
-            })
-            .run();
-        //OKSDK.Widgets.askGroupAppPermissions('GROUP_BOT_API_TOKEN', DOMAIN + '/return.html', { groupId: appConf.group_id });
+        OKSDK.Widgets.askGroupAppPermissions(appConf.group.scopeMap.GROUP_BOT_API_TOKEN, DOMAIN + '/return.html', { groupId: appConf.group_id });
     },
     requestPostingPermission: function () {
         WIDGET_REGISTER.groupPermission
