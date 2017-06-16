@@ -3,6 +3,36 @@ window.console && console.log('init location: ', location);
 var DOMAIN = serverConfig.app_domain || 'ok.ru';
 var WIDGET_REGISTER = {};
 
+var paramsHandlerMap = {
+    'pms.app_conf': function (value) {
+        switch (value) {
+            case 'dev':
+                console.log('>> DEV mode <<');
+                break;
+            case 'test':
+                console.log('>> TEST mode <<');
+                appConf.widget_server = 'https://test.ok.ru/';
+                appConf.api_server = 'https://apitest.ok.ru/';
+                break;
+            case 'prod':
+                console.log('>> PROD mode <<');
+                delete appConf.api_server;
+                delete appConf.widget_server;
+                delete appConf.oauth.layout;
+                break;
+            default:
+                console.log('default');
+                console.log('Start in default mode');
+        }
+    },
+    'pms.app_key': function (value) {
+        appConf.app_key = value;
+    },
+    'pms.app_id': function (value) {
+        appConf.app_id = value;
+    }
+};
+
 prepareConfig();
 
 OKSDK.init(appConf, init_success, init_failure);
@@ -296,39 +326,22 @@ var clickHandlersRegister = {
 
 function prepareConfig() {
     var hrefQuery = location.search;
-    var confParamName = 'app_conf';
-    if (hrefQuery.indexOf(confParamName) > -1) {
-        var paramPairs = hrefQuery.slice(1).split('&');
-        var paramMap = {};
-        for (var i = 0, l = paramPairs.length; i < l; i++) {
-            var pair = paramPairs[i];
-            var nameValue = pair.split('=');
-            paramMap[nameValue[0]] = nameValue[1];
-        }
-        var configModeValue = paramMap[confParamName];
+    var paramPairs = hrefQuery.slice(1).split('&');
+    var parsedUrlParamsMap = {};
 
-        switch (configModeValue) {
-            case 'dev':
-                console.log('>> DEV mode <<');
-                break;
-            case 'test':
-                console.log('>> TEST mode <<');
-                appConf.widget_server = 'https://test.ok.ru/';
-                appConf.api_server = 'https://apitest.ok.ru/';
-                // TODO:
-                //appConf.app_id = "1250486784";
-                //appConf.app_key = "CBALOJILEBABABABA";
-                break;
-            case 'prod':
-                console.log('>> PROD mode <<');
-                delete appConf.api_server;
-                delete appConf.widget_server;
-                delete appConf.oauth.layout;
-                break;
-            default:
-                console.log('default');
-                console.log('Start in default mode');
+    for (var i = 0, l = paramPairs.length; i < l; i++) {
+        var pair = paramPairs[i];
+        var nameValue = pair.split('=');
+        parsedUrlParamsMap[nameValue[0]] = nameValue[1];
+    }
+
+    for (var k in paramsHandlerMap) {
+        var handler = paramsHandlerMap[k];
+        var paramValue = parsedUrlParamsMap[k];
+        if (paramValue) {
+            handler(paramValue)
         }
+
     }
 }
 
