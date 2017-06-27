@@ -35,7 +35,7 @@ var paramsHandlerMap = {
 
 prepareConfig();
 
-OKSDK.init(appConf, init_success, init_failure);
+//OKSDK.init(appConf, init_success, init_failure);
 
 function init_success() {
     window.console && console.info('Initialization success', appConf);
@@ -391,3 +391,15 @@ document.body.addEventListener('click', {
     },
     false
 );
+
+
+document.getElementById('framenamed').addEventListener('click', function (e) {
+    var value = document.getElementById('framenamed_src').value;
+    if (value.length > 0) {
+        e.target.setAttribute('target', value)
+        var iframe = document.createElement('IFRAME');
+        iframe.name = value;
+        document.body.insertBefore(iframe, document.body.children[0]);
+    }
+
+});
