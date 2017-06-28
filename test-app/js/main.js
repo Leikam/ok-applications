@@ -396,10 +396,9 @@ document.body.addEventListener('click', {
 document.getElementById('framenamed').addEventListener('click', function (e) {
     var value = document.getElementById('framenamed_src').value;
     if (value.length > 0) {
-        e.target.setAttribute('target', value)
+        e.target.setAttribute('target', value);
         var iframe = document.createElement('IFRAME');
         iframe.name = value;
         document.body.insertBefore(iframe, document.body.children[0]);
     }
-
 });
