@@ -35,7 +35,7 @@ var paramsHandlerMap = {
 
 prepareConfig();
 
-OKSDK.init(appConf, init_success, init_failure);
+//OKSDK.init(appConf, init_success, init_failure);
 OKSDK.Util.addExternalLinksListener();
 
 function init_success() {
@@ -387,8 +387,16 @@ document.body.addEventListener('click', {
             var target = e.target;
             var id = target.id;
 
+            var path;
             if (id && clickHandlersRegister[id]) {
                 clickHandlersRegister[id].call(window, e);
+            } else if (path = e.path) {
+                for (var i = 0; i < path.length; i++) {
+                    var el = path[i];
+                    if (el.classList && el.classList.contains('js-toggle-block')) {
+                        toggleBlock({target: el});
+                    }
+                }
             } else {
                 window.console && console.warn('Нет такого обработчика');
             }
