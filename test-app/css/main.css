@@ -62,3 +62,10 @@ input {
 .inner-link-decor-3 {
     background: lightskyblue;
     }
+
+.toggle-block {
+    display: none;
+    }
+.toggle-block.__t-open {
+    display: block;
+    }
