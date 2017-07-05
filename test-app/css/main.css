@@ -65,8 +65,9 @@ input {
 
 
 .toggle-block {
-    display: none;
-    }
-.toggle-block.__t-open {
     display: block;
+    }
+
+.hidden {
+    display: none;
     }

@@ -39,8 +39,8 @@ function getCurrentUserData(callback) {
 
 function toggleBlock(e) {
     var target = e.target;
-    document
-        .getElementById(target.getAttribute('data-toggle-forId'))
-        .classList
-        .toggle('__t-open');
+    var element = document.getElementById(target.getAttribute('data-toggle-forId'));
+    element.classList.contains('hidden')
+        ? element.classList.remove('hidden')
+        : element.classList.add('hidden');
 }
