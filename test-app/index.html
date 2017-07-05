@@ -32,10 +32,17 @@
 <ul class="list">
     <!--<li><button id="testAnyFunc">testAnyFunc</button></li>-->
     <li class="list_topic">Ссылки:</li>
+    <!--<li>Выбрать домен:-->
+        <!--<br>-->
+        <!--<a onclick="setLink('https://v.ok.ru', 'https://m.lenta.ru')">https://v.ok.ru (ANY)</a>-->
+        <!--<br>-->
+        <!--<a onclick="setLink('https://m.lenta.ru', 'https://v.ok.ru')">https://m.lenta.ru (X-FRAME-ORIGIN-ONLY)</a>-->
+    <!--</li>-->
     <li>
-        <ol>
+        <ol class="js-change-list">
             <li><a href="/apphook/syslink/https://v.ok.ru" target="_blank">/apphook/syslink/https://v.ok.ru</a></li>
-            <li><a href="/apphook/outlink?url=https://v.ok.ru" target="_blank">/apphook/outlink?url=https://v.ok.ru</a></li>
+            <li><a href="/apphook/outlink?url=https://v.ok.ru" target="_blank">new: /apphook/outlink?url=https://v.ok.ru</a></li>
+            <li><a href="/apphook/outlink/https://v.ok.ru" target="_blank">old: /apphook/outlink/https://v.ok.ru</a></li>
             <li><a class="js-ok-extlink" href="https://v.ok.ru" target="_blank">через js-ok-extlink класс на ссылке</a></li>
             <li>
                 <a class="js-ok-extlink" href="https://v.ok.ru" target="_blank">

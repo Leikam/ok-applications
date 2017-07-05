@@ -325,6 +325,11 @@ var clickHandlersRegister = {
     }
 };
 
+//function setLink(uriToChange, newUri) {
+//    var list = document.getElementsByClassName('js-change-list')[0];
+//    list.innerHTML
+//}
+
 function prepareConfig() {
     var hrefQuery = location.search;
     var paramPairs = hrefQuery.slice(1).split('&');
