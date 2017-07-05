@@ -40,16 +40,15 @@
     <!--</li>-->
     <li>
         <ol class="js-change-list">
+            <li>Стандартные apphooks/*</li>
             <li><a href="/apphook/syslink/https://v.ok.ru" target="_blank">/apphook/syslink/https://v.ok.ru</a></li>
-            <li><a href="/apphook/outlink?url=https://v.ok.ru" target="_blank">new: /apphook/outlink?url=https://v.ok.ru</a></li>
-            <li><a href="/apphook/outlink/https://v.ok.ru" target="_blank">old: /apphook/outlink/https://v.ok.ru</a></li>
-            <li>---</li>
+            <li><a href="/apphook/outlink?url=https://v.ok.ru" target="_blank">/apphook/outlink?url=https://v.ok.ru</a></li>
+            <li><a href="/apphook/outlink/https://v.ok.ru" target="_blank">/apphook/outlink/https://v.ok.ru</a></li>
+            <li>Через OK.ru домен</li>
             <li><a href="https://ok.ru/apphook/outlink/https://v.ok.ru" target="_blank">https://ok.ru/apphook/outlink/https://v.ok.ru</a></li>
             <li><a href="http://ok.ru/apphook/outlink/https://v.ok.ru" target="_blank">http://ok.ru/apphook/outlink/https://v.ok.ru</a></li>
-            <li>---</li>
-            <li><a href="/apphook/outlink/v.ok.ru" target="_blank">old: /apphook/outlink/v.ok.ru</a></li>
-            <li><a href="/apphook/outlink/https://v.ok.ru" target="_blank">old: apphook/outlink/https://v.ok.ru</a></li>
-            <li><a class="js-ok-extlink" href="https://v.ok.ru" target="_blank">через js-ok-extlink класс на ссылке</a></li>
+            <li>JS линки</li>
+            <li><a class="js-ok-extlink" href="https://v.ok.ru" target="_blank">через класс js-ok-extlink на ссылке</a></li>
             <li>
                 <a class="js-ok-extlink" href="https://v.ok.ru" target="_blank">
                     <span class="inner-link-decor-1">
@@ -63,11 +62,12 @@
                     </span>
                 </a>
             </li>
-            <li><span onclick="OKSDK.Util.openAppExternalLink('https://v.ok.ru')">ссылка через openAppExternalLink</span></li>
-            <li><a href="https://v.ok.ru" target="_blank"><b>_blank:</b> новое окно или таб</a></li>
-            <li><a href="https://v.ok.ru" target="_self"><b>_self:</b> в текущем окне</a></li>
-            <li><a href="https://v.ok.ru" target="_parent"><b>_parent</b>: загружает во фрейме иначе, как _self</a></li>
-            <li><a href="https://v.ok.ru" target="_top"><b>_top</b>: убирает фреймы и загружает в полном окне</a></li>
+            <li><span onclick="OKSDK.Util.openAppExternalLink('https://v.ok.ru')">onclick="OKSDK.Util.openAppExternalLink('https://v.ok.ru')"</span></li>
+            <li>Нативные линки</li>
+            <li><a href="https://v.ok.ru" target="_blank"><b>target='_blank'</b> – новое окно или таб</a></li>
+            <li><a href="https://v.ok.ru" target="_self"><b>target='_self'</b> – в текущем окне</a></li>
+            <li><a href="https://v.ok.ru" target="_parent"><b>target='_parent'</b> – загружает во фрейме иначе, как _self</a></li>
+            <li><a href="https://v.ok.ru" target="_top"><b>target='_top'</b> – убирает фреймы и загружает в полном окне</a></li>
             <li>
                 <a href="https://v.ok.ru" id="framenamed">открывает фо фрейме по его имени</a>
                 <input type="text" id="framenamed_src" placeholder="имя фрейма"/>
