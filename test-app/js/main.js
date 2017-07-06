@@ -35,7 +35,7 @@ var paramsHandlerMap = {
 
 prepareConfig();
 
-//OKSDK.init(appConf, init_success, init_failure);
+OKSDK.init(appConf, init_success, init_failure);
 OKSDK.Util.addExternalLinksListener();
 
 function init_success() {
@@ -387,10 +387,10 @@ document.body.addEventListener('click', {
             var target = e.target;
             var id = target.id;
 
-            var path;
             if (id && clickHandlersRegister[id]) {
                 clickHandlersRegister[id].call(window, e);
             } else if (target.classList && target.classList.contains('js-toggle-block')) {
+                e.preventDefault();
                 toggleBlock({target: target});
             } else {
                 window.console && console.warn('Нет такого обработчика');
