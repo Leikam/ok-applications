@@ -16,7 +16,7 @@ var paramsHandlerMap = {
                 break;
             case 'prod':
                 console.log('>> PROD mode <<');
-                //delete appConf.api_server;
+                delete appConf.api_server;
                 delete appConf.widget_server;
                 delete appConf.oauth.layout;
                 break;
