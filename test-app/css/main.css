@@ -3,6 +3,10 @@ body {
     padding: 0;
     }
 
+ul, ol {
+    margin: 8px 0;
+    }
+
 .content {
     outline: 1px solid #e0e0e0;
     padding: 8px;
@@ -71,3 +75,4 @@ input {
 .hidden {
     display: none;
     }
+
