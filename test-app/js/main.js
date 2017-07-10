@@ -1,4 +1,4 @@
-window.console && console.log('init location: ', location);
+window.console && console.log('init location:', location);
 
 var DOMAIN = serverConfig.app_domain || 'ok.ru';
 var WIDGET_REGISTER = {};
@@ -17,7 +17,7 @@ var paramsHandlerMap = {
             case 'prod':
                 console.log('>> PROD mode <<');
                 delete appConf.api_server;
-                delete appConf.widget_server;
+                //delete appConf.widget_server;
                 delete appConf.oauth.layout;
                 break;
             default:
