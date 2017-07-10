@@ -44,7 +44,13 @@
         <a href="#" class="js-toggle-block" style="border-bottom: 1px dashed;" data-toggle-forId="tb-1">открыть/закрыть</a>
         <div id="tb-1" class="toggle-block">
             <ol>
-                <li class="list-topic">Стандартные апхук</li>
+                <li class="list_topic">Обычный ссылки</li>
+                <li><a href="http://mail.ru">http://mail.ru</a>(дефолтный таргет)<</li>
+                <li><a href="http://google.com">http://google.com</a>(дефолтный таргет)<</li>
+                <li><a href="https://v.ok.ru">https://v.ok.ru</a>(дефолтный таргет)</li>
+            </ol>
+            <ol>
+                <li class="list_topic">Стандартные апхук</li>
                 <li><a href="/apphook/syslink/https://v.ok.ru" target="_blank">/apphook/syslink/https://v.ok.ru</a>(/syslink/)</li>
                 <li><a href="/apphook/modallink/https://v.ok.ru" target="_blank">/apphook/modallink/https://v.ok.ru</a>(/modallink/)</li>
                 <li><a href="/apphook/outlink?url=https://v.ok.ru" target="_blank">/apphook/outlink?url=https://v.ok.ru</a></li>
@@ -54,13 +60,13 @@
                 <li><a href="/apphook/external?package=https://v.ok.ru&returnUrl=https://v.ok.ru" target="_blank">/apphook/external?package=https://v.ok.ru&returnUrl=https://v.ok.ru</a></li>
             </ol>
             <ol>
-                <li class="list-topic">Через апхук с OK.ru домена</li>
+                <li class="list_topic">Через апхук с OK.ru домена</li>
                 <li><a href="https://www.ok.ru/apphook/outlink/https://v.ok.ru" target="_blank">https://www.ok.ru/apphook/outlink/https://v.ok.ru</a> (www)</li>
                 <li><a href="https://ok.ru/apphook/outlink/https://v.ok.ru" target="_blank">https://ok.ru/apphook/outlink/https://v.ok.ru</a></li>
                 <li><a href="ok.ru/apphook/outlink/https://v.ok.ru" target="_blank">ok.ru/apphook/outlink/https://v.ok.ru</a>(без протокола)</li>
             </ol>
             <ol>
-                <li class="list-topic">JS-обработка класса .js-ok-extlink</li>
+                <li class="list_topic">JS-обработка класса .js-ok-extlink</li>
                 <li><a class="js-ok-extlink" href="https://v.ok.ru" target="_blank">по классу js-ok-extlink</a></li>
                 <li>
                     <a class="js-ok-extlink" href="https://v.ok.ru" target="_blank">
@@ -79,10 +85,7 @@
             </ol>
         <ol>
         </ol>
-            <li class="list-topic">Нативные линки</li>
-            <li><a href="http://mail.ru">http://mail.ru</a>(дефолтный таргет)<</li>
-            <li><a href="http://google.com">http://google.com</a>(дефолтный таргет)<</li>
-            <li><a href="https://v.ok.ru">https://v.ok.ru</a>(дефолтный таргет)</li>
+            <li class="list_topic">Нативные линки</li>
             <li><a href="https://v.ok.ru" target="_blank"><b>target='_blank'</b> – новое окно или таб</a></li>
             <li><a href="https://v.ok.ru" target="_self"><b>target='_self'</b> – в текущем окне</a></li>
             <li><a href="https://v.ok.ru" target="_parent"><b>target='_parent'</b> – загружает во фрейме иначе, как _self</a></li>
