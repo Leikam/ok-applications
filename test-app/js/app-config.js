@@ -1,6 +1,7 @@
 var appConf = {
     app_id: serverConfig.app.app_id,
     app_key: serverConfig.app.app_key,
+    use_extlinks: true,
     group: {
         fullScope: [
             'MESSAGES_FROM_GROUP',

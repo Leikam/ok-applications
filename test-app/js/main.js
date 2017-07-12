@@ -36,7 +36,6 @@ var paramsHandlerMap = {
 prepareConfig();
 
 OKSDK.init(appConf, init_success, init_failure);
-OKSDK.Util.addExternalLinksListener();
 
 function init_success() {
     window.console && console.info('Initialization success', appConf);
