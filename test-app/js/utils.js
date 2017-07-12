@@ -44,3 +44,13 @@ function toggleBlock(e) {
         ? element.classList.remove('hidden')
         : element.classList.add('hidden');
 }
+
+function logger(data) {
+    var loggerCont = document.getElementById('logger-cnt');
+    loggerCont.className = '__active';
+    var text = document.createTextNode(data);
+    var br = document.createElement('BR');
+    loggerCont.appendChild(text);
+    loggerCont.appendChild(br);
+    loggerCont.appendChild(br);
+}

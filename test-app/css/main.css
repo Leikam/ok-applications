@@ -76,3 +76,25 @@ input {
     display: none;
     }
 
+
+
+/* Logger
+---------------------------------------------------------------------------------- */
+
+#logger-cnt {
+    display: none;
+    }
+
+#logger-cnt.__active {
+    display: block;
+    padding: 8px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    max-height: 250px;
+    max-width: 250px;
+    outline: 2px solid black;
+    }
+
+/* /Logger
+---------------------------------------------------------------------------------- */
