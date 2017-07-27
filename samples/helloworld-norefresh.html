@@ -3,7 +3,11 @@
     <meta charset="UTF-8">
     <title>OKSDK - Advanced No-Refresh Hello World</title>
 
-    <script type="text/javascript" src="../oksdk.js"></script>
+    <script src="../conf/server-config.js"></script>
+    <script src="../conf/local-server-config.js"></script>
+    <script src="../conf/app-config.js"></script>
+    <script src="../js/appConfigurator.js"></script>
+    <script type="text/javascript" src="../libs/ok-js-sdk/oksdk.js"></script>
 </head>
 <body>
 
@@ -12,14 +16,17 @@
 </div>
 <div id="content"></div>
 
-<script src="../js/config.js"></script>
 <script type="text/javascript">
-//    var config = {
-//        app_id: 0,      // <-- insert APP ID here
-//        app_key: ''     // <-- insert APP PUBLIC KEY here
-//    };
+    prepareConfig();
+
 
     var config = appConf;
+    /*
+    {
+        app_id: appConf.app_id,      // <-- insert APP ID here
+        app_key: appConf.app_key     // <-- insert APP PUBLIC KEY here
+    };
+    */
 
     document.addEventListener('DOMContentLoaded', function () {
         config.oauth = {};

@@ -1,6 +1,7 @@
 var appConf = {
     app_id: serverConfig.app.app_id,
     app_key: serverConfig.app.app_key,
+    app_secret_key: serverConfig.app.app_secret_key, // only for demo usage, real secret key must be hidden
     use_extlinks: true,
     group: {
         fullScope: [

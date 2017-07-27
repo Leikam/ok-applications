@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>OKSDK - Hello World</title>
+
+    <script src="../conf/server-config.js"></script>
+    <script src="../conf/local-server-config.js"></script>
+    <script src="../conf/app-config.js"></script>
+    <script src="../js/appConfigurator.js"></script>
+    <script type="text/javascript" src="../libs/ok-js-sdk/oksdk.js"></script>
+</head>
+<body>
+
+<div id="backBtn"></div>
+<div id="content"></div>
+
+<script type="text/javascript">
+    prepareConfig(); // tune global window.appConf
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var config = appConf;
+        /*
+        {
+            app_id: appConf.app_id,      // <-- insert APP ID here
+            app_key: appConf.app_key     // <-- insert APP PUBLIC KEY here
+        };
+        */
+
+        OKSDK.init(config, function() {
+
+            OKSDK.Widgets.getBackButtonHtml(function(html) {
+                document.getElementById('backBtn').innerHTML = html;
+            });
+
+            OKSDK.REST.call('users.getCurrentUser', null, function(status, data, error) {
+                if (status == 'ok') {
+                    document.getElementById('content').innerHTML = 'Hello World and hi, ' + data.name + '.';
+                } else {
+                    alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
+                }
+            });
+
+        }, function(error) {
+            alert('OKSDK error' + OKSDK.Util.toString(error));
+        })
+
+    });
+</script>
+
+</body>
+</html>
