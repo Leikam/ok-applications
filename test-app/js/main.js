@@ -268,7 +268,7 @@ var clickHandlersRegister = {
             DOMAIN + 'return.html',
             {
                 popupConfig: {
-                    //name: "demo_title",
+                    name: "demo_title",
                     width: 600,
                     height: 300,
                     options: 'status=0, menubar=0'
