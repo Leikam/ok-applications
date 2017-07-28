@@ -224,7 +224,15 @@ var clickHandlersRegister = {
     requestChatPermission_shortcut: function () {
         OKSDK.Widgets.askGroupAppPermissions(
             appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
-            DOMAIN + 'return.html'
+            DOMAIN + 'return.html',
+            {
+                popupConfig: {
+                    name: "demo_title",
+                    width: 600,
+                    height: 300,
+                    options: 'status=0, menubar=0'
+                }
+            }
         );
     },
 
@@ -270,7 +278,15 @@ var clickHandlersRegister = {
     requestAllGroupPermissions_shortcut: function () {
         OKSDK.Widgets.askGroupAppPermissions(
             appConf.group.fullScope,
-            DOMAIN + 'return.html'
+            DOMAIN + 'return.html',
+            {
+                popupConfig: {
+                    name: "demo_title",
+                    width: 600,
+                    height: 300,
+                    options: 'status=0, menubar=0'
+                }
+            }
         );
     },
 
