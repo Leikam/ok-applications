@@ -207,17 +207,12 @@ var clickHandlersRegister = {
             .addParams({scope: appConf.oauth.scope})
             .run();
     },
+
     requestChatPermission: function () {
         WIDGET_REGISTER.groupChatPermission
             .changeParams({
                 groupId: appConf.group_id,
                 scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
-                popupConfig: {
-                    name: "demo_title",
-                    width: 600,
-                    height: 300,
-                    options: 'status=0, menubar=0'
-                }
             })
             .run();
     },
@@ -255,15 +250,7 @@ var clickHandlersRegister = {
     requestPostingPermission_shortcut: function () {
         OKSDK.Widgets.askGroupAppPermissions(
             appConf.group.scopeMap.MESSAGES_FROM_GROUP,
-            DOMAIN + 'return.html',
-            {
-                popupConfig: {
-                    name: "demo_title",
-                    width: 600,
-                    height: 300,
-                    options: 'status=0, menubar=0'
-                }
-            }
+            DOMAIN + 'return.html'
         );
     },
 
