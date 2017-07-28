@@ -6,17 +6,41 @@
     <title>Страница возврата</title>
 </head>
 <body>
+
 <p>Запрос обработан, сейчас перенаправим..</p>
 <div>
     Осталось: <span id="counter">3</span>
 </div>
+
+<p id="response-server" style="white-space: pre-line">
+    <i>Ответ с сервера</i>
+</p>
+<p id="response-postmessage" style="white-space: pre-line">
+    <i>Ответ от postMessage</i>
+</p>
 <button id="stop">Остаться на странице</button>
 <br>
 
 <script>
     var counterNode = document.getElementById('counter');
     var stopButton = document.getElementById('stop');
+    var respServer = document.getElementById('response-server');
+    var respMessage = document.getElementById('response-postmessage');
     var tid;
+
+    var locQuery = location.search || '-----';
+    var locHash= location.hash || '-----';
+    var locOrigin = location.origin || '-----';
+    respServer.innerHTML = '';
+    var documentFragment = document.createDocumentFragment();
+    documentFragment.appendChild(
+        document.createTextNode(
+            'query: ' + locQuery +
+            '\n\rhash: ' + locHash +
+            '\n\rorigin: ' + locOrigin
+        )
+    );
+    respServer.appendChild(documentFragment);
 
     stopButton.addEventListener('click', function () {
         clearTimeout(tid);
@@ -50,6 +74,7 @@
 
     window.addEventListener('message', function (e) {
         console.log('-> Return page got a message', e.data);
+        respMessage.innerHTML = e.data;
     })
 </script>
 

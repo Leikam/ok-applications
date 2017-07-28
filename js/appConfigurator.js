@@ -1,23 +1,20 @@
 var paramsHandlerMap = {
     'pms.app_conf': function (value) {
         switch (value) {
-            case 'dev':
-                console.log('>> DEV mode <<');
-                break;
             case 'test':
-                console.log('>> TEST mode <<');
+                window.console && console.log('>> TEST mode <<');
                 appConf.widget_server = 'https://test.ok.ru/';
                 appConf.api_server = 'https://apitest.ok.ru/';
                 break;
             case 'prod':
-                console.log('>> PROD mode <<');
+                window.console && console.log('>> PROD mode <<');
                 delete appConf.api_server;
                 delete appConf.widget_server;
                 delete appConf.oauth.layout;
                 break;
             default:
-                console.log('default');
-                console.log('Start in default mode');
+                window.console && console.log('>> default DEV mode <<');
+                window.console && console.log('By devmode GROUP_ID settled to ' + appConf.group_id);
         }
     },
     'pms.app_key': function (value) {

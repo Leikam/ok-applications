@@ -52,10 +52,14 @@ function init_success() {
         }
     );
 
-    WIDGET_REGISTER.groupPermission = OKSDK.Widgets.builds.askGroupAppPermissions.configure({
+    var groupPermissionBaseOptions = {
         redirect_uri: DOMAIN + 'return.html',
         response_type: 'token'
-    });
+    };
+
+    WIDGET_REGISTER.groupAllPermission = OKSDK.Widgets.builds.askGroupAppPermissions.configure(groupPermissionBaseOptions);
+    WIDGET_REGISTER.groupPostPermission = OKSDK.Widgets.builds.askGroupAppPermissions.configure(groupPermissionBaseOptions);
+    WIDGET_REGISTER.groupChatPermission = OKSDK.Widgets.builds.askGroupAppPermissions.configure(groupPermissionBaseOptions);
 }
 function init_failure() {
     window.console && console.error('Initialization failed', this);
@@ -204,7 +208,7 @@ var clickHandlersRegister = {
             .run();
     },
     requestChatPermission: function () {
-        WIDGET_REGISTER.groupPermission
+        WIDGET_REGISTER.groupChatPermission
             .changeParams({
                 groupId: appConf.group_id,
                 scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
@@ -217,41 +221,43 @@ var clickHandlersRegister = {
             })
             .run();
     },
-    requestChatPermission_1: function () {
-        WIDGET_REGISTER.groupPermission
-            .changeParams({
-                groupId: appConf.group_id,
-                scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
-                popupConfig: {
-                    name: "demo_title",
-                    width: 600,
-                    height: 300,
-                    options: 'status=0, menubar=0'
-                }
-            })
-            .run();
-    },
-    requestChatPermission_2: function () {
-        // if app launches as external,  we need to get and set groupId explicitly;
-        OKSDK.Widgets.askGroupAppPermissions(appConf.group.scopeMap.GROUP_BOT_API_TOKEN, DOMAIN + 'return.html', { groupId: appConf.group_id });
-    },
+    //requestChatPermission_1: function () {
+    //    WIDGET_REGISTER.groupPermission
+    //        .changeParams({
+    //            groupId: appConf.group_id,
+    //            scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
+    //            popupConfig: {
+    //                name: "demo_title",
+    //                width: 600,
+    //                height: 300,
+    //                options: 'status=0, menubar=0'
+    //            }
+    //        })
+    //        .run();
+    //},
+    //requestChatPermission_2: function () {
+    //    // if app launches as external,  we need to get and set groupId explicitly;
+    //    OKSDK.Widgets.askGroupAppPermissions(appConf.group.scopeMap.GROUP_BOT_API_TOKEN, DOMAIN + 'return.html', { groupId: appConf.group_id });
+    //},
     requestPostingPermission: function () {
-        WIDGET_REGISTER.groupPermission
-            .changeParams({
-                groupId: appConf.group_id,
-                scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP,
+        WIDGET_REGISTER.groupPostPermission
+            .addParams({
                 popupConfig: {
                     name: "demo_title",
                     width: 600,
                     height: 300,
                     options: 'status=0, menubar=0'
                 }
+            })
+            .changeParams({
+                groupId: appConf.group_id,
+                scope: appConf.group.scopeMap.MESSAGES_FROM_GROUP
             })
             .run();
     },
     requestAllGroupPermissions: function () {
-        WIDGET_REGISTER.groupPermission
-            .changeParams({
+        WIDGET_REGISTER.groupAllPermission
+            .addParams({
                 groupId: appConf.group_id,
                 scope: appConf.group.fullScope // both: 'MESSAGES_FROM_GROUP', 'GROUP_BOT_API_TOKEN'
             })
