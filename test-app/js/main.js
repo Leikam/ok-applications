@@ -221,24 +221,13 @@ var clickHandlersRegister = {
             })
             .run();
     },
-    //requestChatPermission_1: function () {
-    //    WIDGET_REGISTER.groupPermission
-    //        .changeParams({
-    //            groupId: appConf.group_id,
-    //            scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
-    //            popupConfig: {
-    //                name: "demo_title",
-    //                width: 600,
-    //                height: 300,
-    //                options: 'status=0, menubar=0'
-    //            }
-    //        })
-    //        .run();
-    //},
-    //requestChatPermission_2: function () {
-    //    // if app launches as external,  we need to get and set groupId explicitly;
-    //    OKSDK.Widgets.askGroupAppPermissions(appConf.group.scopeMap.GROUP_BOT_API_TOKEN, DOMAIN + 'return.html', { groupId: appConf.group_id });
-    //},
+    requestChatPermission_shortcut: function () {
+        OKSDK.Widgets.askGroupAppPermissions(
+            appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
+            DOMAIN + 'return.html'
+        );
+    },
+
     requestPostingPermission: function () {
         WIDGET_REGISTER.groupPostPermission
             .addParams({
@@ -255,6 +244,21 @@ var clickHandlersRegister = {
             })
             .run();
     },
+    requestPostingPermission_shortcut: function () {
+        OKSDK.Widgets.askGroupAppPermissions(
+            appConf.group.scopeMap.MESSAGES_FROM_GROUP,
+            DOMAIN + 'return.html',
+            {
+                popupConfig: {
+                    name: "demo_title",
+                    width: 600,
+                    height: 300,
+                    options: 'status=0, menubar=0'
+                }
+            }
+        );
+    },
+
     requestAllGroupPermissions: function () {
         WIDGET_REGISTER.groupAllPermission
             .addParams({
@@ -263,6 +267,13 @@ var clickHandlersRegister = {
             })
             .run();
     },
+    requestAllGroupPermissions_shortcut: function () {
+        OKSDK.Widgets.askGroupAppPermissions(
+            appConf.group.fullScope,
+            DOMAIN + 'return.html'
+        );
+    },
+
     aboutGroup: function (e) {
         OKSDK.REST.call('group.getInfo', {
             uids: 54423259185266,
