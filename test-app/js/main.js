@@ -187,7 +187,6 @@ var clickHandlersRegister = {
             utext: 'on',
             silent: 'off',
             popupConfig: {
-                name: "demo_title",
                 width: 600,
                 height: 500,
                 options: 'status=0, menubar=0'
@@ -212,7 +211,7 @@ var clickHandlersRegister = {
         WIDGET_REGISTER.groupChatPermission
             .changeParams({
                 groupId: appConf.group_id,
-                scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN,
+                scope: appConf.group.scopeMap.GROUP_BOT_API_TOKEN
             })
             .run();
     },
@@ -222,7 +221,6 @@ var clickHandlersRegister = {
             DOMAIN + 'return.html',
             {
                 popupConfig: {
-                    name: "demo_title",
                     width: 600,
                     height: 300,
                     options: 'status=0, menubar=0'
@@ -235,7 +233,6 @@ var clickHandlersRegister = {
         WIDGET_REGISTER.groupPostPermission
             .addParams({
                 popupConfig: {
-                    name: "demo_title",
                     width: 600,
                     height: 300,
                     options: 'status=0, menubar=0'
@@ -268,7 +265,6 @@ var clickHandlersRegister = {
             DOMAIN + 'return.html',
             {
                 popupConfig: {
-                    name: "demo_title",
                     width: 600,
                     height: 300,
                     options: 'status=0, menubar=0'
