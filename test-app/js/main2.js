@@ -8,6 +8,10 @@ domReady(function () {
         app_key: 'CBADNCLLEBABABABA'
     };
 
+    window.addEventListener('messgae', function (e) {
+       console.log('got message', e,  e.data);
+    });
+
     window.OKSDK.init(config,
         function () {
             alert('success');
