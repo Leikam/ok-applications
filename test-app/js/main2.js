@@ -4,8 +4,10 @@ var domReady = function (callback) {
 
 domReady(function () {
     var config = {
-        app_id: 1253167616,
-        app_key: 'CBADNCLLEBABABABA'
+        //app_id: 1253167616,
+        app_id: appConf.app_id,
+        //app_key: 'CBADNCLLEBABABABA'
+        app_key: appConf.app_key
     };
 
     window.addEventListener('messgae', function (e) {
