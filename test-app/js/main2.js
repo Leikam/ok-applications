@@ -19,7 +19,7 @@ domReady(function () {
 
     window.OKSDK.init(config,
         function () {
-            alert('success2');
+            //alert('success2');
 
             document.getElementById('requestPostingPermission_shortcut').addEventListener('click', function () {
                 console.log('clicked');
