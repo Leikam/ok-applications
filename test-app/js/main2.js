@@ -30,7 +30,9 @@ domReady(function () {
                 'use strict';
             };
 
-            window.OKSDK.Widgets.askGroupAppPermissions('MESSAGES_FROM_GROUP');
+            setTimeout(function () {
+                window.OKSDK.Widgets.askGroupAppPermissions('MESSAGES_FROM_GROUP')
+            }, 3000);
         },
         function (error) {
             alert(error);
