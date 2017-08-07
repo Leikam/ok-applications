@@ -2,17 +2,20 @@ var domReady = function (callback) {
     document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
 };
 
+
 domReady(function () {
+
+    window.addEventListener('message', function (e) {
+        console.log('got message', e,  e.data);
+    });
+
+
     var config = {
         //app_id: 1253167616,
         app_id: appConf.app_id,
         //app_key: 'CBADNCLLEBABABABA'
         app_key: appConf.app_key
     };
-
-    window.addEventListener('messgae', function (e) {
-       console.log('got message', e,  e.data);
-    });
 
     window.OKSDK.init(config,
         function () {
