@@ -19,7 +19,7 @@ domReady(function () {
 
     window.OKSDK.init(config,
         function () {
-            alert('success');
+            alert('success1');
             window.API_callback = function (method, result, data) {
                 'use strict';
 
