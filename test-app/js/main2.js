@@ -19,16 +19,17 @@ domReady(function () {
 
     window.OKSDK.init(config,
         function () {
-            alert('success1');
+            alert('success2');
+
+            document.getElementById('requestPostingPermission_shortcut').addEventListener('click', function () {
+                console.log('clicked');
+                window.OKSDK.Widgets.askGroupAppPermissions('MESSAGES_FROM_GROUP');
+            });
+
             window.API_callback = function (method, result, data) {
                 'use strict';
-
-                document.getElementById('requestPostingPermission_shortcut').addEventListener('click', function () {
-                    console.log('clicked');
-                    window.OKSDK.Widgets.askGroupAppPermissions('MESSAGES_FROM_GROUP');
-                })
-
             };
+
             window.OKSDK.Widgets.askGroupAppPermissions('MESSAGES_FROM_GROUP');
         },
         function (error) {
